@@ -1,0 +1,10 @@
+css.feedback {
+  display: flex;
+  gap: 5px;
+}
+
+.counter {
+  font-size: 18px;
+  font-weight: 400;
+  color: #212121;
+}
