@@ -26,7 +26,6 @@ export default function ContactForm({ onAdd }) {
   const numberFieldId = useId();
 
   const handleSubmit = (values, actions) => {
-    console.log(values);
     onAdd({
       id: nanoid(),
       name: values.name,
@@ -42,17 +41,31 @@ export default function ContactForm({ onAdd }) {
       validationSchema={ContactSchema}
     >
       <Form className={css.form}>
-        <label htmlFor={nameFieldId}>Name</label>
-        <Field className={css.field} type="text" name="Name" id={nameFieldId} />
-        <ErrorMessage name="Name" as="span" />
-        <label htmlFor={numberFieldId}>Number</label>
-        <Field
-          className={css.field}
-          type="text"
-          name="Number"
-          id={numberFieldId}
-        />
-        <ErrorMessage name="Number" as="span" />
+        <div className={css.box}>
+          <label className={css.label} htmlFor={nameFieldId}>
+            Name
+          </label>
+          <Field
+            className={css.field}
+            type="text"
+            name="name"
+            id={nameFieldId}
+          />
+          <ErrorMessage className={css.error} name="name" as="span" />
+        </div>
+        <div className={css.box}>
+          <label className={css.label} htmlFor={numberFieldId}>
+            Number
+          </label>
+          <Field
+            className={css.field}
+            type="text"
+            name="number"
+            id={numberFieldId}
+          />
+          <ErrorMessage className={css.error} name="number" as="span" />
+        </div>
+
         <button className={css.button} type="submit">
           Add contact
         </button>

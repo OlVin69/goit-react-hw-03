@@ -2,12 +2,19 @@
   width: 500px;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   gap: 15px;
   border: 2px solid #212121;
   padding: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
 }
 
 .field {
@@ -21,6 +28,10 @@
   border-radius: 4px;
 }
 
+.field:focus-visible {
+  outline-color: #535bf2;
+}
+
 .button {
   width: 200px;
   font-family: inherit;
@@ -30,4 +41,14 @@
   background-color: #f3f0f0;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.label {
+  font-weight: 500;
+  color: #212121;
+}
+
+.error {
+  font-weight: 500;
+  color: red;
 }
