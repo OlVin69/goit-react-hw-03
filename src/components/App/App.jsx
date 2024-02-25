@@ -1,63 +1,51 @@
 import './App.css';
-import Description from '../Description/Description';
-import Options from '../Options/Options';
-import Feedback from '../Feedback/Feedback';
-import Notification from '../Notification/Notification';
+
 import { useState, useEffect } from 'react';
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList ';
+import SearchBox from './SearchBox/SearchBox';
 
 export default function App() {
-  const [values, setValues] = useState(() => {
-    const savedValues = localStorage.getItem('saved-values');
-    if (savedValues !== null) {
-      return JSON.parse(savedValues);
+  const ininialContacts = [
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ];
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem('saved-contacts');
+    if (savedContacts !== null) {
+      return JSON.parse(savedContacts);
     }
-    return { good: 0, neutral: 0, bad: 0 };
+    return ininialContacts;
   });
+  const [filter, setFilter] = useState('');
 
-  const updateFeedback = option => {
-    setValues({
-      ...values,
-      [option]: values[option] + 1,
-    });
+  const addContact = newContact => {
+    setContacts(prevContacts => [...prevContacts, newContact]);
+    console.log(newContact);
   };
 
-  const resetFeedback = () => {
-    setValues({
-      good: 0,
-      neutral: 0,
-      bad: 0,
+  const deleteContact = contactId => {
+    setContacts(prevContacts => {
+      return prevContacts.filter(contact => contact.id !== contactId);
     });
   };
 
   useEffect(() => {
-    localStorage.setItem('saved-values', JSON.stringify(values));
-  }, [values]);
+    localStorage.setItem('saved-contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
-  const totalFeedback = values.good + values.neutral + values.bad;
-  const relationFeedback = Math.round(
-    ((values.good + values.neutral) / totalFeedback) * 100
+  const visibleContacts = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return (
-    <>
-      <Description />
-      <Options
-        values={values}
-        onUpdate={updateFeedback}
-        total={totalFeedback}
-        resetTotal={resetFeedback}
-      />
-      {totalFeedback > 0 ? (
-        <Feedback
-          good={values.good}
-          neutral={values.neutral}
-          bad={values.bad}
-          totalValue={totalFeedback}
-          relation={relationFeedback}
-        />
-      ) : (
-        <Notification />
-      )}
-    </>
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm onAdd={addContact} />
+      <SearchBox value={filter} onFilter={setFilter} />
+      <ContactList contacts={visibleContacts} onDelete={deleteContact} />
+    </div>
   );
 }

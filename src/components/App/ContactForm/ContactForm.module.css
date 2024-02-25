@@ -1,0 +1,33 @@
+.form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+  border: 2px solid #212121;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.field {
+  width: 450px;
+  font-size: 18px;
+  font-weight: normal;
+  color: #212121;
+  padding: 10px;
+  outline: 2px solid #212121;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.button {
+  width: 200px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: normal;
+  border: 1 solid #212121;
+  background-color: #f3f0f0;
+  border-radius: 2px;
+  cursor: pointer;
+}
