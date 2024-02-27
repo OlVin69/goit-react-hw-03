@@ -73,25 +73,3 @@ export default function ContactForm({ onAdd }) {
     </Formik>
   );
 }
-
-// export default function ContactForm({ onAdd }) {
-//   const handleSubmit = e => {
-//     e.preventDefault();
-//     onAdd({
-//       id: nanoid(),
-//       name: e.target.elements.Name.value,
-//       number: e.target.elements.Number.value,
-//     });
-//     e.target.reset();
-//   };
-
-//   return (
-//     <form className={css.form} onSubmit={handleSubmit}>
-//       <input className={css.field} type="text" name="Name" />
-//       <input className={css.field} type="text" name="Number" />
-//       <button className={css.button} type="submit">
-//         Add contact
-//       </button>
-//     </form>
-//   );
-// }

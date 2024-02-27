@@ -8,8 +8,11 @@ import SearchBox from './SearchBox/SearchBox';
 export default function App() {
   const [contacts, setContacts] = useState(() => {
     const savedContacts = localStorage.getItem('saved-contacts');
-    if (savedContacts !== '[]') {
-      return JSON.parse(savedContacts);
+    if (savedContacts) {
+      const parsedContacts = JSON.parse(savedContacts);
+      if (Array.isArray(parsedContacts) && parsedContacts.length > 0) {
+        return parsedContacts;
+      }
     }
     return [];
   });
